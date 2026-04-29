@@ -1,43 +1,11 @@
 import argparse
 import requests
-import sys
-from typing import NoReturn
 
 from src.iconrenderer import IconRenderer
+import src.log as log
+from src.log import warn, fatal, vprint
 
 VERSION = "1.1"
-
-verbose = False
-
-
-def vhint() -> None:
-    if not verbose:
-        print("Use verbose mode for extra info. (-v)")
-
-def vprint(*args, **kwargs) -> None:
-    if verbose:
-        print(*args, **kwargs)
-
-
-def fatal(e:Exception | str, doing: str | None = None) -> NoReturn:
-    name = e if isinstance(e, str) else type(e).__name__
-    msg = f"{doing}" if doing else ""
-    print(f"\033[31mFatal: {name} {msg}\033[0m")
-
-    if isinstance(e, Exception):
-        vhint()
-        vprint(e)
-
-    sys.exit(1)
-
-def warn(e: Exception | str, doing: str | None = None) -> None:
-    name = e if isinstance(e, str) else type(e).__name__
-    msg = f"{doing}" if doing else ""
-    print(f"\033[33mWarning: {name} {msg}\033[0m")
-
-    if isinstance(e, Exception):
-        vhint()
-        vprint(e)
 
 # api url constructor
 def api_url(host: str, port: int): 
@@ -141,10 +109,9 @@ def display_data(data: dict, render_icon: bool, icon_size: int = 16) -> None:
 
 # Main
 def main() -> None:
-    global verbose
 
     args = parse_args()
-    verbose = args.verbose
+    log.verbose = args.verbose
     icon_size = args.icon
 
     if icon_size is None:
