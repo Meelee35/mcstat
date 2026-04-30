@@ -83,7 +83,7 @@ wheels = [
 ]
 
 [[package]]
-name = "mcping"
+name = "mcstat"
 version = "1.1"
 source = { virtual = "." }
 dependencies = [

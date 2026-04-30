@@ -1,9 +1,9 @@
 import argparse
 import requests
 
-from mcping.iconrenderer import IconRenderer
-import mcping.log as log
-from mcping.log import warn, fatal, vprint
+from mcstat.iconrenderer import IconRenderer
+import mcstat.log as log
+from mcstat.log import warn, fatal, vprint
 
 VERSION = "1.1"
 
