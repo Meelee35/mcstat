@@ -22,7 +22,11 @@ def _display_players(players_dict: dict | None) -> None:
     print(f"Players: {online} / {max_players}")
 
     if online > 0:
-        print(", ".join(player["name_clean"] for player in player_list) if player_list else "No player list available")
+        if player_list:
+            for i, player in enumerate(player_list, 1):
+                print(f"{i}. {player['name_clean']}")
+        else:
+            print("No player list available")
 
 
 def _display_version(version_dict: dict | None) -> None:
