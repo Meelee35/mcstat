@@ -12,26 +12,28 @@ def vprint(*args, **kwargs) -> None:
     if verbose:
         print(*args, **kwargs)
 
-
-def fatal(e: Exception | str, context: str | None = None) -> NoReturn:
-    name = e if isinstance(e, str) else type(e).__name__
+def _format_error(prefix: str, error: Exception | str, context: str | None) -> str:
+    name = error if isinstance(error, str) else type(error).__name__
     msg = context or ""
-    content = f"Fatal: {name} {msg}".strip()
+    return f"{prefix}: {name} {msg}".strip()
+
+def fatal(error: Exception | str, context: str | None = None) -> NoReturn:
+    """Format and display a fatal error, then exit. Outputs full error details in verbose mode."""
+    content = _format_error("Fatal", error, context)
     print(f"\033[31m{content}\033[0m")
 
-    if isinstance(e, Exception):
+    if isinstance(error, Exception):
         vhint()
-        vprint(e)
+        vprint(error)
 
     sys.exit(1)
 
 
-def warn(e: Exception | str, context: str | None = None) -> None:
-    name = e if isinstance(e, str) else type(e).__name__
-    msg = context or ""
-    content = f"Warning: {name} {msg}".strip()
+def warn(error: Exception | str, context: str | None = None) -> None:
+    """Format and display a warning. Outputs full error details in verbose mode."""
+    content = _format_error("Warning", error, context)
     print(f"\033[33m{content}\033[0m")
 
-    if isinstance(e, Exception):
+    if isinstance(error, Exception):
         vhint()
-        vprint(e)
+        vprint(error)

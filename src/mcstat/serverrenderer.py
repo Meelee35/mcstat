@@ -5,6 +5,7 @@ from mcstat.motd_parser import format_motd
 
 
 def display(data: dict) -> None:
+    """Display api response neatly"""
     _display_motd(data.get("motd"))
     _display_version(data.get("version"))
     _display_players(data.get("players"))
