@@ -2,6 +2,8 @@ from PIL import Image
 import base64
 import io
 
+from mcstat.log import fatal
+
 class IconRenderer:
     def __init__(self, size: int = 16):
         self.size = size
