@@ -9,6 +9,7 @@ class IconRenderer:
         self.size = size
 
     def render(self, data: dict) -> None:
+        """Render base64 image in truecolor ansi background blocks. Requires truecolor terminal emulator"""
         icon = data.get("icon")
 
         if not icon:
@@ -40,14 +41,14 @@ class IconRenderer:
                 r, g, b, a = pixels[x, y]
 
                 if a < 128:
-                    pixel = " "
+                    pixel = "\033[0m "
                 else:
                     pixel = self._block(r, g, b)
                 line += pixel * 2
 
-            print(line)
+            print(line + "\033[0m")
 
         print()
 
     def _block(self, r: int, g: int, b: int) -> str:
-        return f"\033[48;2;{r};{g};{b}m \033[0m"
+        return f"\033[48;2;{r};{g};{b}m "
