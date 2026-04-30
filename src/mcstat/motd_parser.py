@@ -30,13 +30,13 @@ def _replace_code(code: str) -> str:
     return MOTD_COLORS.get(code, "\033[0m")
 
 def format_motd(motd: str) -> str:
+    """Convert raw motd formatting to ansi formatting"""
     vprint("Formatting motd: " + motd)
 
     temp = re.sub(" +", " ", motd)
     processed_motd = ""
     for line in temp.splitlines():
         processed_motd += re.sub(r'^(§.)\s+', r'\1', line) + "\n"
-    vprint("Removed duplicate spaces: " + processed_motd)
 
     result = ""
 
@@ -45,7 +45,6 @@ def format_motd(motd: str) -> str:
         if processed_motd[i] == "§" and i + 1 < len(processed_motd):
             code = processed_motd[i+1]
             new_code = _replace_code(code)
-            vprint(f"Replaced {code} with {repr(new_code)}")
             result += new_code
             i += 1
         else:
