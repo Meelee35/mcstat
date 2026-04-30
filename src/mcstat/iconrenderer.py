@@ -14,6 +14,7 @@ class IconRenderer:
         if not icon:
             fatal("No icon provided")
 
+        print("Server icon:")
         img_bytes = self._extract_bytes(icon)
         self._draw(img_bytes)
 

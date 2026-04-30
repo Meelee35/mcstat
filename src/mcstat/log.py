@@ -13,10 +13,11 @@ def vprint(*args, **kwargs) -> None:
         print(*args, **kwargs)
 
 
-def fatal(e: Exception | str, doing: str | None = None) -> NoReturn:
+def fatal(e: Exception | str, context: str | None = None) -> NoReturn:
     name = e if isinstance(e, str) else type(e).__name__
-    msg = f"{doing}" if doing else ""
-    print(f"\033[31mFatal: {name} {msg}\033[0m")
+    msg = context or ""
+    content = f"Fatal: {name} {msg}".strip()
+    print(f"\033[31m{content}\033[0m")
 
     if isinstance(e, Exception):
         vhint()
@@ -25,10 +26,11 @@ def fatal(e: Exception | str, doing: str | None = None) -> NoReturn:
     sys.exit(1)
 
 
-def warn(e: Exception | str, doing: str | None = None) -> None:
+def warn(e: Exception | str, context: str | None = None) -> None:
     name = e if isinstance(e, str) else type(e).__name__
-    msg = f"{doing}" if doing else ""
-    print(f"\033[33mWarning: {name} {msg}\033[0m")
+    msg = context or ""
+    content = f"Warning: {name} {msg}".strip()
+    print(f"\033[33m{content}\033[0m")
 
     if isinstance(e, Exception):
         vhint()
