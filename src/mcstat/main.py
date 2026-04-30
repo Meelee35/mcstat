@@ -18,6 +18,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("port", nargs="?", type=int, default=25565, help="Server port (Default: 25565)")
     parser.add_argument("-v", "--verbose", action="store_true", help="Enable verbose output")
     parser.add_argument("-i", "--icon", nargs="?", const=16, type=int, metavar="SIZE", help="Display server's icon instead of standard information (Default: 16px)")
+    parser.add_argument("--version", action="version", version=f"mcstat {VERSION}", help="Print mcstat version")
     return parser.parse_args()
 
 # Fetch data
@@ -109,7 +110,6 @@ def display_data(data: dict, render_icon: bool, icon_size: int = 16) -> None:
 
 # Main
 def main() -> None:
-
     args = parse_args()
     log.verbose = args.verbose
     icon_size = args.icon

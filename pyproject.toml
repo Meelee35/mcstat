@@ -1,14 +1,21 @@
 [project]
 name = "mcstat"
-version = "1.1"
-description = "Simple tool to get minecraft server info"
+version = "0.1.0"
+description = "Add your description here"
 readme = "README.md"
+authors = [
+    { name = "Meelee35", email = "124620845+Meelee35@users.noreply.github.com" }
+]
 requires-python = ">=3.14"
 dependencies = [
     "pillow>=12.2.0",
-    "pyinstaller>=6.20.0",
     "requests>=2.33.1",
 ]
 
 [project.scripts]
-mcstat = "src.main:main"
+mcstat = "mcstat.main:main"
+
+[build-system]
+requires = ["uv_build>=0.11.6,<0.12.0"]
+build-backend = "uv_build"
+
