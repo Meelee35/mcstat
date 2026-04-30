@@ -1,5 +1,3 @@
-import requests
-
 import mcstat.log as log
 from mcstat.iconrenderer import IconRenderer
 from mcstat.log import warn, fatal, vprint
@@ -9,28 +7,22 @@ from mcstat.fetch_data import get_data
 from mcstat.serverrenderer import display
 
 
-# Main
 def main() -> None:
     args = parse_args()
     
     log.verbose = args.verbose
     icon_size = args.icon
 
-    if icon_size is None:
-        render_icon = False
-    else:
-        render_icon = True
-        icon_size = max(1, min(icon_size, 64))
-
     url = api_url(args.host, args.port)
     data = get_data(url)
 
-    if render_icon:
-        icon_renderer = IconRenderer(size=icon_size)
-        icon_renderer.render(data)
-    else:
+    if icon_size is None:
         vprint("Displaying data")
         display(data)
+    else:
+        icon_size = max(1, min(icon_size, 64))
+        icon_renderer = IconRenderer(size=icon_size)
+        icon_renderer.render(data)
 
 
 if __name__ == "__main__":
