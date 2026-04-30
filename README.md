@@ -1,4 +1,13 @@
 # mcstat
+[![Build](https://github.com/Meelee35/mcstat/actions/workflows/main.yml/badge.svg)](https://github.com/Meelee35/mcstat/actions/workflows/main.yml)
+![Python](https://img.shields.io/badge/python-3.14-blue)
+![GitHub release](https://img.shields.io/github/v/release/Meelee35/mcstat)
+![GitHub license](https://img.shields.io/github/license/Meelee35/mcstat)
+![GitHub Repo stars](https://img.shields.io/github/stars/Meelee35/mcstat)
+
+
+
+
 A command-line tool to get Minecraft server info from your terminal.  
 **Currently only supports Java Edition servers.**
 
