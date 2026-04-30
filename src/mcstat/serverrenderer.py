@@ -1,4 +1,5 @@
 from mcstat.log import vprint, warn
+from mcstat.motd_parser import format_motd
 
 
 def display(data: dict) -> None:
@@ -37,7 +38,8 @@ def _display_motd(motd_dict: dict | None) -> None:
     if not motd_dict:
         warn("No MOTD available.")
         return
-
-    for line in motd_dict["clean"].splitlines():
-        print(line.strip())
-    print()
+    
+    clean = ""
+    for line in motd_dict["raw"].splitlines():
+        clean += line.strip() + "\n"
+    print(format_motd(clean))

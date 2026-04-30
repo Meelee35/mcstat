@@ -1,3 +1,7 @@
+import re
+
+from mcstat.log import vprint
+
 MOTD_COLORS = {
     "0": "\033[38;2;0;0;0m",         # black
     "1": "\033[38;2;0;0;170m",       # dark blue
@@ -21,3 +25,32 @@ MOTD_COLORS = {
     "m": "\033[9m",                  # strikethrough
     "r": "\033[0m",                  # reset
 }
+
+def _replace_code(code: str) -> str:
+    return MOTD_COLORS.get(code, "\033[0m")
+
+def format_motd(motd: str) -> str:
+    vprint("Formatting motd: " + motd)
+
+    temp = re.sub(" +", " ", motd)
+    processed_motd = ""
+    for line in temp.splitlines():
+        processed_motd += re.sub(r'^(§.)\s+', r'\1', line) + "\n"
+    vprint("Removed duplicate spaces: " + processed_motd)
+
+    result = ""
+
+    i = 0
+    while i < len(processed_motd):
+        if processed_motd[i] == "§" and i + 1 < len(processed_motd):
+            code = processed_motd[i+1]
+            new_code = _replace_code(code)
+            vprint(f"Replaced {code} with {repr(new_code)}")
+            result += new_code
+            i += 1
+        else:
+            result += processed_motd[i]
+
+        i += 1
+    vprint("Finished formatting: " + repr(result + "\033[0m"))
+    return result + "\033[0m"
