@@ -6,7 +6,7 @@ readme = "README.md"
 authors = [
     { name = "Meelee35", email = "124620845+Meelee35@users.noreply.github.com" }
 ]
-requires-python = ">=3.14"
+requires-python = ">=3.12"
 dependencies = [
     "pillow>=12.2.0",
     "pyinstaller>=6.20.0",
